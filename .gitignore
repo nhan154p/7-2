@@ -1,0 +1,7 @@
+node_modules/
+.env
+.DS_Store
+*.log
+data/users.txt
+data/activities.json
+data/messages.json
