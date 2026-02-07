@@ -1,6 +1,13 @@
 class ParticleSystem {
     constructor(canvasId) {
         this.canvas = document.getElementById(canvasId);
+        
+        // Check if canvas exists
+        if (!this.canvas) {
+            console.warn(`Canvas with id "${canvasId}" not found`);
+            return;
+        }
+        
         this.ctx = this.canvas.getContext('2d');
         this.particles = [];
         
