@@ -1,7 +1,7 @@
 // ============== CONFIGURATION ==============
 const API_URL = window.location.hostname === 'localhost' 
   ? 'http://localhost:3000' 
-  : 'https://seven-2-hcew.onrender.com';
+  : 'https://seven-w0ht.onrender.com';
 const CACHE_KEYS = {
     ACTIVITIES: 'lop72_activities',
     MESSAGES: 'lop72_messages',
