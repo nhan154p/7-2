@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lớp 7/2 - Ngôi nhà của bầy báo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ============ PAGE CONTAINER ============ -->
+    <div class="page-container">
+        
+        <!-- ============ LOGIN PAGE ============ -->
+        <div id="loginPage" class="page active">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h1><i class="fas fa-rocket"></i> LỚP 7/2</h1>
+                        <p>FAMILY 7/2</p>
+                    </div>
+                    <form id="loginForm" class="auth-form">
+                        <div class="form-group">
+                            <label>Username hoặc Email</label>
+                            <input type="text" id="loginUsername" required placeholder="Nhập username hoặc email">
+                        </div>
+                        <div class="form-group">
+                            <label>Mật khẩu</label>
+                            <input type="password" id="loginPassword" required placeholder="Nhập mật khẩu">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                    </form>
+                    <div class="auth-footer">
+                        <p>Chưa có tài khoản? <a href="#" onclick="switchPage('registerPage')">Đăng ký ngay</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ REGISTER PAGE ============ -->
+        <div id="registerPage" class="page">
+            <div class="auth-container">
+                <div class="auth-card">
+                    <div class="auth-header">
+                        <h1><i class="fas fa-rocket"></i> LỚP 7/2</h1>
+                        <p>Tạo tài khoản mới</p>
+                    </div>
+                    <form id="registerForm" class="auth-form">
+                        <div class="form-group">
+                            <label>Họ và tên</label>
+                            <input type="text" id="fullName" required placeholder="Nhập họ và tên đầy đủ">
+                        </div>
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" id="username" required placeholder="Nhập username">
+                        </div>
+                        <div class="form-group">
+                            <label>Mật khẩu</label>
+                            <input type="password" id="password" required placeholder="Nhập mật khẩu (tối thiểu 6 ký tự)">
+                        </div>
+                        <div class="form-group">
+                            <label>Email (Tùy chọn)</label>
+                            <input type="email" id="email" placeholder="Nhập email">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Đăng ký</button>
+                    </form>
+                    <div class="auth-footer">
+                        <p>Đã có tài khoản? <a href="#" onclick="switchPage('loginPage')">Đăng nhập</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============ MAIN HUB PAGE ============ -->
+        <div id="hubPage" class="page">
+            <!-- Navigation -->
+            <nav class="navbar">
+                <div class="nav-container">
+                    <div class="nav-logo">
+                        <i class="fas fa-rocket"></i>
+                        <span>LỚP 7/2</span>
+                    </div>
+                    <div class="nav-menu" id="navMenu">
+                        <a href="#" onclick="switchSection('home')" class="nav-link active" data-section="home">Trang chủ</a>
+                        <a href="#" onclick="switchSection('members')" class="nav-link" data-section="members">Thành viên</a>
+                        <a href="#" onclick="switchSection('activities')" class="nav-link" data-section="activities">Hoạt động</a>
+                        <a href="#" onclick="switchSection('chat')" class="nav-link" data-section="chat">Chat</a>
+                        <a href="#" onclick="switchSection('profile')" class="nav-link" data-section="profile" id="profileLink">Hồ sơ</a>
+                        <button class="nav-btn" id="logoutBtn" onclick="logout()">Đăng xuất</button>
+                    </div>
+                    <div class="hamburger" id="hamburger">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- ============ HOME SECTION ============ -->
+            <section id="home" class="section active">
+                <div class="particles" id="particles"></div>
+                <div class="hero">
+                    <div class="hero-content">
+                        <h1 class="hero-title">LỚP 7/2</h1>
+                        <p class="hero-subtitle">Neon Digital Hub</p>
+                        <p class="hero-text">Nơi gặp gỡ, chia sẻ và phát triển cùng nhau</p>
+                        <p class="hero-info">Xin chào <span id="userGreeting"></span>! 👋</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ MEMBERS SECTION ============ -->
+            <section id="members" class="section">
+                <div class="container">
+                    <h2><i class="fas fa-users"></i> Thành viên lớp</h2>
+                    <div class="search-bar">
+                        <input type="text" id="searchMembers" placeholder="Tìm kiếm thành viên..." class="search-input" onkeyup="searchMembers()">
+                    </div>
+                    <div class="members-grid" id="membersGrid">
+                        <p class="loading">Đang tải...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ ACTIVITIES SECTION ============ -->
+            <section id="activities" class="section">
+                <div class="container">
+                    <h2><i class="fas fa-feed"></i> Hoạt động</h2>
+                    <button class="btn btn-primary" id="newActivityBtn" onclick="openActivityModal()">+ Đăng bài mới</button>
+                    <div class="activities-feed" id="activitiesFeed">
+                        <p class="loading">Đang tải...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ CHAT SECTION ============ -->
+            <section id="chat" class="section">
+                <div class="container">
+                    <h2><i class="fas fa-comments"></i> Chat Chung</h2>
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chatMessages"></div>
+                        <div class="chat-input-area">
+                            <input type="text" id="messageInput" placeholder="Nhập tin nhắn..." class="chat-input">
+                            <input type="file" id="chatImageInput" accept="image/*" style="display:none;">
+                            <button type="button" class="btn-icon" id="imageBtn" onclick="document.getElementById('chatImageInput').click()" title="Thêm hình ảnh"><i class="fas fa-image"></i></button>
+                            <button class="btn-icon" id="sendBtn" onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                        <div id="imagePreview" class="image-preview" style="display:none;">
+                            <img id="previewImg" src="" alt="Preview">
+                            <button type="button" onclick="clearImagePreview()" class="btn-clear">Xóa</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============ PROFILE SECTION ============ -->
+            <section id="profile" class="section">
+                <div class="container">
+                    <h2><i class="fas fa-user"></i> Hồ sơ cá nhân</h2>
+                    <div class="profile-card" id="profileCard">
+                        <p class="loading">Đang tải...</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- ============ MODALS ============ -->
+    <div id="activityModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeActivityModal()">&times;</span>
+            <h2>Đăng bài mới</h2>
+            <form id="activityForm" onsubmit="submitActivity(event)">
+                <div class="form-group">
+                    <label>Tiêu đề</label>
+                    <input type="text" id="activityTitle" required placeholder="Nhập tiêu đề">
+                </div>
+                <div class="form-group">
+                    <label>Nội dung</label>
+                    <textarea id="activityContent" required placeholder="Nhập nội dung"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Hình ảnh</label>
+                    <input type="file" id="activityImage" accept="image/*" placeholder="Chọn hình ảnh...">
+                    <div id="activityImagePreview" style="margin-top: 10px; display: none;">
+                        <img id="activityPreviewImg" src="" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 4px;">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Loại hoạt động</label>
+                    <select id="activityType">
+                        <option value="event">Sự kiện</option>
+                        <option value="achievement">Thành tích</option>
+                        <option value="study">Học tập</option>
+                        <option value="fun">Vui vẻ</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Đăng bài</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="particles.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
