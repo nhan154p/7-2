@@ -1,7 +1,7 @@
 // ============== CONFIGURATION ==============
 const API_URL = window.location.hostname === 'localhost' 
   ? 'http://localhost:3000' 
-  : 'https://seven-w0ht.onrender.com';
+  : 'https://silly-yeot-fa803a.netlify.app';
 const CACHE_KEYS = {
     ACTIVITIES: 'lop72_activities',
     MESSAGES: 'lop72_messages',
